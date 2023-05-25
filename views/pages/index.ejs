@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <%- include('headerFixe') -%>
+    <title>Blog</title>
+</head>
+<body>
+    <div class="container">
+
+        <%- include('navbar') -%>
+
+        <!-- affichage des messgaes -->
+        <div class="row" id="messages">
+            <% for (mes of message) { %>
+                <div class="qui"><%= mes.prenom %>  <%= mes.nom %> : </div>
+                <div class="blog"><%= mes.message %></div>
+            <% } %> 
+        </div>
+
+        <hr>
+        <hr>
+
+        <!-- formulaire  -->
+        <div class="row">
+            <div class="form-group">
+                <label for="exampleNom">Nom</label>
+                <input type="text" name="nom" class="form-control" id="exempleNom" placeholder="nom" value="lagadec">
+            </div>
+            <div class="form-group">
+                <label for="examplePrenom">Prénom</label>
+                <input type="text" name="prenom" class="form-control" id="exemplePrenom" placeholder="prénom" value="jobig">
+            </div>
+            <div class="form-group">
+                <label for="exampleTextarea">Message</label>
+                <textarea name="exempleTextarea" class="form-control" id="exempleTextarea" placeholder="votre message" value="mon message"></textarea>
+            </div>
+            <div>
+                <button type="button" id="sub" class="btn btn-primary">post</button>
+                <button type="button" id="sub2" class="btn btn-danger">delete</button>
+            </div>
+        </div>
+       
+
+        <!-- une photo, ça ne sert à rien ici mais ça n'est pas grave -->
+        <div class="row">
+            <div class="col-md-12">
+                <img src="guiss.png" alt="oups">
+            </div>
+        </div>
+
+    </div>
+
+
+    <%- include('footer') -%>
+
+</body>
+</html>

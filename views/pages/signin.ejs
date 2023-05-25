@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <%- include('headerFixe') -%>
+    <title>enregistrez-vous</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <%- include('navbar') -%>
+
+        <!-- message d'alerte pour les erreurs d'enregistrements -->
+        <div class="row">
+            <p id="message" class="alert alert-secondary" role="alert"><%- message %></p>
+        </div>
+
+        <!-- formulaire d'enregistrement -->
+        <div class="row">
+            
+            <p>Inscrivez-vous</p>
+
+            <form action="/signin" method="post">
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="text" name="nom" class="form-control" id="nom" placeholder="nom" value="kervella">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="prénom" value="bobby">
+                </div>
+                <div>
+                    <button type="submit" id="sub" class="btn btn-primary">post</button>
+                </div>
+            </form>
+        </div>
+       
+    </div>
+
+    <%- include('footer') -%>
+
+</body>
+</html>
