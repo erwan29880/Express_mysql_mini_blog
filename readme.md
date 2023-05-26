@@ -7,7 +7,7 @@ Une partie authentification (enregistrement utilisateur, connection), et une par
 
 ## base de données :   
 
-Pour uniquement la base de données, commenter le service node dans le docker-compose. 
+Pour uniquement la base de données, commenter le service node dans le docker-compose, changer db/config host par localhost.
 La base de données est basée sur une image docker mysql 8.
 Le dossier mysql est à créer avant d'exécuter la commande 
 
@@ -26,6 +26,8 @@ nodemon index.js
 L'application est disponible en localhost, port 8080.   
 
 ## tout containeurisé : 
+
+Commenter les lignes de ports pour le service mysql (non obligatoire).  
 
 ``` bash
 docker-compose up -d --build
