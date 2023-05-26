@@ -24,6 +24,24 @@ exports.deleteNom = (req, res, next) => {
     })   
 };
 
+// update blog 
+// première connection à la page /api
+exports.updateBlog = (request, response, next) => {
+    const nbrMessages = parseInt(request.params.id);
+    const mess = new db();
+    mess.getNames()
+    .then(res => {
+        if (res.length != nbrMessages) {
+            response.status(201).json({ message : res });
+            next()
+        } else {
+            response.status(200).json({ message: "nochange"});
+            next()
+        }
+    })
+    .catch((error) => {response.status(500).json({ error })}); 
+};
+
 // première connection à la page /api
 exports.index = (request, response) => {
     const mess = new db();

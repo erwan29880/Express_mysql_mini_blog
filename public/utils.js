@@ -1,7 +1,6 @@
 // pour différencier les évènements en fonction des urls
 const path = window.location.pathname;
 
-
 /**
  * envoie/reçoit les données au/du serveur en ajax
  * 
@@ -31,8 +30,6 @@ async function ajax(data, url) {
 }
 
 
-
-
 if (path === "/api") {
 
     // functions
@@ -42,9 +39,11 @@ if (path === "/api") {
      * 
      * @param {array} array qui contient des json
      */
-    function addHtml(array) {
+    function addHtml(array, erase = true) {
         let affichageMessages = document.getElementById('messages');
-        affichageMessages.innerHTML = "";
+        if (erase === true) {
+            affichageMessages.innerHTML = "";
+        }
         for (let i=0 ; i< array.length ; i++) {
             let myDiv = document.createElement("div");
             let myDiv2 = document.createElement("div");
@@ -91,8 +90,7 @@ if (path === "/api") {
         let cl = document.getElementsByClassName("qui");
         for (test of cl) {
             let len = test.innerText.length;
-            console.log(len);
-            len = len * 10;
+            len = len * 12;
             test.style.width = len + "px";
             test.style.backgroundColor = "green";
             test.style.borderRadius = "5px";
@@ -104,6 +102,31 @@ if (path === "/api") {
         };
     }
 
+    /**
+     * mise à jour du blog
+     */
+    function update() {
+        const myDivs = document.querySelectorAll("#messages > div");
+        const nbre = myDivs.length;
+        fetch("/api/update/" + nbre.toString())
+        .then((res) => {
+           res.json()
+           .then(rep => {
+                if (rep.message.length < nbre) {
+                    addHtml(rep.message);
+                } else if (rep.message.length > nbre) {
+                    addHtml(rep.message.slice(nbre, rep.message.length), erase = false);
+                } else if (rep.message.length === nbre) {
+                    if (myDivs[nbre].innerText === rep.message[nbre]) {
+                        console.log("oui même longueur");
+                    } else {
+                        console.log("non pas même longueur")
+                    }
+                } else { ; }
+           })
+        });
+    }
+
 
     // events
 
@@ -113,7 +136,6 @@ if (path === "/api") {
         const nom = document.getElementById("exempleNom").value;
         const prenom = document.getElementById("exemplePrenom").value;
         const message = document.getElementById("exempleTextarea").value;
-        console.log(message);
         const data = {
             nom : nom,
             prenom: prenom,
@@ -130,7 +152,10 @@ if (path === "/api") {
     })
 
     // initialisation du style au chargement de la page
+    // initialisation de la mise à jour du blog
     styleBlog();
+    setInterval(update, 3000);
+
 };
 
 
@@ -144,6 +169,5 @@ if (path === "/signin" || path === "/login") {
     if (message.innerText === "") {
         message.classList.remove("alert");
         message.classList.remove("alert-secondary");
-        console.log(message);
     }
 };

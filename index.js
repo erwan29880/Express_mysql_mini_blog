@@ -13,7 +13,7 @@ app.use(cors())
 app.use(sessions({
     secret: "secret",
     saveUninitialized:true,
-    cookie: { maxAge: 5000000, secure: false },
+    cookie: { maxAge: 50000000, secure: false },
     resave: false
 }));
 app.use(express.json());
