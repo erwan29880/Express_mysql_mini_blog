@@ -14,7 +14,7 @@ exit;
 */
 
 let conn = mysql.createConnection({
-    host : 'localhost',
+    host : 'mysqldb',
     user : 'admin',
     password : 'admin',
     database : 'testnode'

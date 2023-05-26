@@ -10,4 +10,13 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
 
+  nodeapp1:
+    container_name: express1
+    build:
+      context: . 
+      dockerfile: Dockerfile
+    ports:
+      - 8888:8080 
+    restart: always
+
 # dossier mysql à créer avant de docker-compose up -d --build
